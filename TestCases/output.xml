@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.1.2 (Python 3.7.4 on win32)" generated="20190927 00:08:16.933" rpa="false">
+<suite id="s1" name="TC1 GET REQUEST" source="C:\Users\vikgaur\PycharmProjects\ APITestingRobotFramework\TestCases\TC1_GET_REQUEST.robot">
+<test id="s1-t1" name="TestCase1: Verify GET_City_Details">
+<kw name="GET_City_Details">
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>mysession</arg>
+<arg>${baseURL}</arg>
+</arguments>
+<msg timestamp="20190927 00:08:17.129" level="INFO">Creating Session using : alias=mysession, url=http://restapi.demoqa.com, headers={},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20190927 00:08:17.129" endtime="20190927 00:08:17.129"></status>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>mysession</arg>
+<arg>/utilities/weather/city/${City}</arg>
+</arguments>
+<assign>
+<var>${response}</var>
+</assign>
+<msg timestamp="20190927 00:08:17.723" level="INFO">Get Request using : alias=mysession, uri=/utilities/weather/city/Hyderabad, headers=None json=None</msg>
+<msg timestamp="20190927 00:08:17.723" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20190927 00:08:17.129" endtime="20190927 00:08:17.723"></status>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<doc>Converts the given item to a Unicode string.</doc>
+<arguments>
+<arg>${response.status_code}</arg>
+</arguments>
+<assign>
+<var>${status_code}</var>
+</assign>
+<msg timestamp="20190927 00:08:17.725" level="INFO">${status_code} = 200</msg>
+<status status="PASS" starttime="20190927 00:08:17.723" endtime="20190927 00:08:17.725"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${status_code}</arg>
+<arg>200</arg>
+</arguments>
+<status status="PASS" starttime="20190927 00:08:17.725" endtime="20190927 00:08:17.725"></status>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<doc>Converts the given item to a Unicode string.</doc>
+<arguments>
+<arg>${response.content}</arg>
+</arguments>
+<assign>
+<var>${body}</var>
+</assign>
+<msg timestamp="20190927 00:08:17.727" level="INFO">${body} = {
+    "City": "Hyderabad",
+    "Temperature": "23.04 Degree celsius",
+    "Humidity": "94 Percent",
+    "WeatherDescription": "thunderstorm with light rain",
+    "WindSpeed": "5.1 Km per hour",
+    "W...</msg>
+<status status="PASS" starttime="20190927 00:08:17.726" endtime="20190927 00:08:17.727"></status>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<arguments>
+<arg>${body}</arg>
+<arg>Hyderabad</arg>
+</arguments>
+<status status="PASS" starttime="20190927 00:08:17.727" endtime="20190927 00:08:17.728"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${response.headers}</arg>
+<arg>Content-Type</arg>
+</arguments>
+<assign>
+<var>${contentTypeValue}</var>
+</assign>
+<msg timestamp="20190927 00:08:17.729" level="INFO">${contentTypeValue} = application/json</msg>
+<status status="PASS" starttime="20190927 00:08:17.728" endtime="20190927 00:08:17.729"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${contentTypeValue}</arg>
+<arg>application/json</arg>
+</arguments>
+<status status="PASS" starttime="20190927 00:08:17.730" endtime="20190927 00:08:17.730"></status>
+</kw>
+<kw name="Delete All Sessions" library="RequestsLibrary">
+<doc>Removes all the session objects</doc>
+<msg timestamp="20190927 00:08:17.731" level="INFO">Delete All Sessions</msg>
+<status status="PASS" starttime="20190927 00:08:17.730" endtime="20190927 00:08:17.731"></status>
+</kw>
+<status status="PASS" starttime="20190927 00:08:17.128" endtime="20190927 00:08:17.731"></status>
+</kw>
+<doc>Verify GET_City_Details</doc>
+<tags>
+<tag>GET_City_Details</tag>
+</tags>
+<status status="PASS" starttime="20190927 00:08:17.128" endtime="20190927 00:08:17.732" critical="yes"></status>
+</test>
+<test id="s1-t2" name="TestCase2: Verify GET_List_of_Users">
+<kw name="GET_List_of_Users">
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>mysession</arg>
+<arg>${baseAPI_URL}</arg>
+</arguments>
+<msg timestamp="20190927 00:08:17.738" level="INFO">Creating Session using : alias=mysession, url=https://reqres.in/, headers={},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20190927 00:08:17.737" endtime="20190927 00:08:17.739"></status>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>mysession</arg>
+<arg>/api/users?page=/${Page}</arg>
+</arguments>
+<assign>
+<var>${response_ListUsers}</var>
+</assign>
+<msg timestamp="20190927 00:08:18.348" level="INFO">Get Request using : alias=mysession, uri=/api/users?page=/2, headers=None json=None</msg>
+<msg timestamp="20190927 00:08:18.348" level="INFO">c:\users\vikgaur\pycharmprojects\robotautomation\venv\lib\site-packages\urllib3\connectionpool.py:851: InsecureRequestWarning: Unverified HTTPS request is being made. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning)</msg>
+<msg timestamp="20190927 00:08:18.349" level="INFO">${response_ListUsers} = &lt;Response [404]&gt;</msg>
+<status status="PASS" starttime="20190927 00:08:17.739" endtime="20190927 00:08:18.350"></status>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<doc>Converts the given item to a Unicode string.</doc>
+<arguments>
+<arg>${response_ListUsers.status_code}</arg>
+</arguments>
+<assign>
+<var>${status_code}</var>
+</assign>
+<msg timestamp="20190927 00:08:18.352" level="INFO">${status_code} = 404</msg>
+<status status="PASS" starttime="20190927 00:08:18.350" endtime="20190927 00:08:18.352"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${status_code}</arg>
+<arg>404</arg>
+</arguments>
+<status status="PASS" starttime="20190927 00:08:18.352" endtime="20190927 00:08:18.353"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${response_ListUsers.headers}</arg>
+<arg>Content-Type</arg>
+</arguments>
+<assign>
+<var>${contentTypeValue}</var>
+</assign>
+<msg timestamp="20190927 00:08:18.355" level="INFO">${contentTypeValue} = text/html; charset=utf-8</msg>
+<status status="PASS" starttime="20190927 00:08:18.354" endtime="20190927 00:08:18.355"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${contentTypeValue}</arg>
+<arg>text/html; charset=utf-8</arg>
+</arguments>
+<status status="PASS" starttime="20190927 00:08:18.355" endtime="20190927 00:08:18.356"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${response_ListUsers.headers}</arg>
+<arg>server</arg>
+</arguments>
+<assign>
+<var>${ServerName}</var>
+</assign>
+<msg timestamp="20190927 00:08:18.357" level="INFO">${ServerName} = cloudflare</msg>
+<status status="PASS" starttime="20190927 00:08:18.356" endtime="20190927 00:08:18.357"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${ServerName}</arg>
+<arg>cloudflare</arg>
+</arguments>
+<status status="PASS" starttime="20190927 00:08:18.358" endtime="20190927 00:08:18.359"></status>
+</kw>
+<status status="PASS" starttime="20190927 00:08:17.736" endtime="20190927 00:08:18.359"></status>
+</kw>
+<doc>Verify GET_List_of_Users</doc>
+<tags>
+<tag>GET_List_of_Users</tag>
+</tags>
+<status status="PASS" starttime="20190927 00:08:17.735" endtime="20190927 00:08:18.360" critical="yes"></status>
+</test>
+<doc>Suite description</doc>
+<status status="PASS" starttime="20190927 00:08:16.936" endtime="20190927 00:08:18.363"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="2" fail="0">Critical Tests</stat>
+<stat pass="2" fail="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="1" fail="0">GET_City_Details</stat>
+<stat pass="1" fail="0">GET_List_of_Users</stat>
+</tag>
+<suite>
+<stat pass="2" fail="0" id="s1" name="TC1 GET REQUEST">TC1 GET REQUEST</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
